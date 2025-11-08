@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "RTNsnW5ngGc=",
+  "success": true,
+  "projectFilePath": "E:\\Korp_Teste_Elder\\Faturamento.API\\Faturamento.API.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\elder\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.8\\microsoft.aspnetcore.openapi.9.0.8.nupkg.sha512",
+    "C:\\Users\\elder\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
