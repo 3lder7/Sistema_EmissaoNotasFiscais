@@ -1,0 +1,26 @@
+<div class="produtos-container">
+  <h2>Lista de Produtos</h2>
+  
+  <div *ngIf="produtos.length === 0">
+    <p>Nenhum produto cadastrado.</p>
+  </div>
+
+  <div *ngIf="produtos.length > 0">
+    <table>
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Descrição</th>
+          <th>Saldo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let produto of produtos">
+          <td>{{ produto.codigo }}</td>
+          <td>{{ produto.descricao }}</td>
+          <td>{{ produto.saldo }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
