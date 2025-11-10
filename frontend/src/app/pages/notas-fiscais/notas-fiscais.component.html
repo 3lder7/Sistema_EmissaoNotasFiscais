@@ -1,0 +1,26 @@
+<div class="notas-fiscais-container">
+  <h2>Lista de Notas Fiscais</h2>
+  
+  <div *ngIf="notasFiscais.length === 0">
+    <p>Nenhuma nota fiscal cadastrada.</p>
+  </div>
+
+  <div *ngIf="notasFiscais.length > 0">
+    <table>
+      <thead>
+        <tr>
+          <th>Numeração</th>
+          <th>Status</th>
+          <th>Itens</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let nota of notasFiscais">
+          <td>{{ nota.numeracao }}</td>
+          <td>{{ nota.status }}</td>
+          <td>{{ nota.itens.length }} itens</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
