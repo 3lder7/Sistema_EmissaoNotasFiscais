@@ -1,6 +1,26 @@
 <div class="notas-fiscais-container">
   <h2>Lista de Notas Fiscais</h2>
-  
+
+  <button (click)="mostrarFormulario = true">Nova Nota Fiscal</button>
+
+  <div *ngIf="mostrarFormulario" class="form-container">
+    <h3>Nova Nota Fiscal</h3>
+    <form (ngSubmit)="criarNotaFiscal()">
+      <div>
+        <label>Status:</label>
+        <select [(ngModel)]="novaNotaFiscal.status" name="status">
+          <option value="Aberta">Aberta</option>
+          <option value="Fechada">Fechada</option>
+        </select>
+      </div>
+
+    <p><small>Os itens da nota serão implementados em seguida</small></p>
+
+    <button type="submit">Criar Nota</button>
+    <button type="button" (click)="cancelar()">Cancelar</button>
+    </form>
+  </div>
+
   <div *ngIf="notasFiscais.length === 0">
     <p>Nenhuma nota fiscal cadastrada.</p>
   </div>
