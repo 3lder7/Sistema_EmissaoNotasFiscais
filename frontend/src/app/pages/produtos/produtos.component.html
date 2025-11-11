@@ -1,6 +1,28 @@
 <div class="produtos-container">
   <h2>Lista de Produtos</h2>
-  
+
+  <button (click)="mostrarFormulario = true">Novo Produto</button>
+
+  <div *ngIf="mostrarFormulario" class="form-container">
+    <h3>Cadastrar Novo Produto</h3>
+    <form (ngSubmit)="criarProduto()">
+      <div>
+        <label>Código:</label>
+        <input [(ngModel)]="novoProduto.codigo" name="codigo" required>
+      </div>
+      <div>
+        <label>Descrição:</label>
+        <input [(ngModel)]="novoProduto.descricao" name="descricao" required>
+      </div>
+      <div>
+        <label>Saldo Inicial:</label>
+        <input [(ngModel)]="novoProduto.saldo" name="saldo" type="number" required>
+      </div>
+      <button type="submit">Salvar</button>
+      <button type="button" (click)="cancelar()">Cancelar</button>
+    </form>
+  </div>
+
   <div *ngIf="produtos.length === 0">
     <p>Nenhum produto cadastrado.</p>
   </div>
