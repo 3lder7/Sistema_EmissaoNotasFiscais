@@ -14,10 +14,10 @@
         </select>
       </div>
 
-    <p><small>Os itens da nota serão implementados em seguida</small></p>
+      <p><small>Os itens da nota serão implementados em seguida</small></p>
 
-    <button type="submit">Criar Nota</button>
-    <button type="button" (click)="cancelar()">Cancelar</button>
+      <button type="submit">Criar Nota</button>
+      <button type="button" (click)="cancelar()">Cancelar</button>
     </form>
   </div>
 
@@ -39,6 +39,15 @@
           <td>{{ nota.numeracao }}</td>
           <td>{{ nota.status }}</td>
           <td>{{ nota.itens.length }} itens</td>
+          <td>
+            <button
+              (click)="imprimirNota(nota)"
+              [disabled]="nota.status !== 'Aberta'"
+              class="btn-imprimir"
+            >
+              {{ carregandoImpressao === nota.id ? 'Imprimindo...' : 'Imprimir' }}
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>

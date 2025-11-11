@@ -14,6 +14,8 @@ import { FormsModule } from '@angular/forms';
 export class NotasFiscaisComponent implements OnInit {
   notasFiscais: NotaFiscal[] = [];
   mostrarFormulario = false;
+  carregandoImpressao: number | null = null;
+
   novaNotaFiscal: NotaFiscal = {
     id: 0,
     numeracao: '',
@@ -61,4 +63,27 @@ export class NotasFiscaisComponent implements OnInit {
       itens: [] 
     };
   }
+
+  imprimirNota(nota: NotaFiscal) {
+    if (nota.status !== 'Aberta') {
+      alert('Apenas notas com status "Aberta" podem ser impressas');
+      return;
+    }
+
+    this.carregandoImpressao = nota.id;
+    
+    // impressao 2 segundos
+    setTimeout(() => {
+      this.finalizarImpressao(nota);
+    }, 2000);
+  }
+
+  finalizarImpressao(nota: NotaFiscal) {
+    nota.status = 'Fechada';
+    this.carregandoImpressao = null;
+    
+    console.log(`Nota ${nota.numeracao} impressa e fechada`);
+    // logica api backend
+  }
+    
 }
