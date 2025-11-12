@@ -21,8 +21,9 @@ export class ProdutosComponent implements OnInit {
     saldo: 0
   };
   erroCarregamento = '';//mensagem de erro
+  salvandoProduto = false;
 
-  constructor(private produtoService: ProdutoService) {}
+  constructor(private produtoService: ProdutoService) { }
 
   ngOnInit() {
     this.carregarProdutos();
@@ -43,14 +44,32 @@ export class ProdutosComponent implements OnInit {
   }
 
   criarProduto() {
+    //validações básicas
+    if (!this.novoProduto.codigo || !this.novoProduto.descricao || this.novoProduto.saldo < 0) {
+      alert('Preencha todos os campos corretamente.');
+      return;
+    }
+    const codigoExistente = this.produtos.find(p => p.codigo === this.novoProduto.codigo);
+    if (codigoExistente) {
+      alert('Já existe um produto com este código!');
+      return;
+    }
+    if (this.salvandoProduto) {
+      return; // impede multiplos cliques
+    }
+
+    this.salvandoProduto = true;
+
     this.produtoService.criarProduto(this.novoProduto).subscribe({
       next: (produtoCriado) => {
         this.produtos.push(produtoCriado);
         this.cancelar();
+        this.salvandoProduto = false;//libera o botao
         console.log('Produto criado:', produtoCriado);
       },
       error: (erro) => {
         console.error('Erro ao criar produto:', erro);
+        this.salvandoProduto = false;//libera o botao
       }
     });
   }

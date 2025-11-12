@@ -2,7 +2,7 @@
   <h2>Lista de Produtos</h2>
 
   <button (click)="mostrarFormulario = true">Novo Produto</button>
-  <div *ngIf="erroCarregamento" class="erro-mensagem"> 
+  <div *ngIf="erroCarregamento" class="erro-mensagem">
     {{ erroCarregamento }}
   </div>
 
@@ -21,7 +21,12 @@
         <label>Saldo Inicial:</label>
         <input [(ngModel)]="novoProduto.saldo" name="saldo" type="number" required />
       </div>
-      <button type="submit">Salvar</button>
+      <button 
+      type="submit" 
+       [disabled]="salvandoProduto || !novoProduto.codigo || !novoProduto.descricao"
+        class="btn-salvar">
+        {{ salvandoProduto ? 'Salvando...' : 'Salvar' }}
+      </button>
       <button type="button" (click)="cancelar()">Cancelar</button>
     </form>
   </div>
