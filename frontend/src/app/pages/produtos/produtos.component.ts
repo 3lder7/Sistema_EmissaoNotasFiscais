@@ -14,12 +14,13 @@ import { FormsModule } from '@angular/forms';
 export class ProdutosComponent implements OnInit {
   produtos: Produto[] = [];
   mostrarFormulario = false;
-    novoProduto: Produto = {
+  novoProduto: Produto = {
     id: 0,
     codigo: '',
     descricao: '',
     saldo: 0
   };
+  erroCarregamento = '';//mensagem de erro
 
   constructor(private produtoService: ProdutoService) {}
 
@@ -28,12 +29,14 @@ export class ProdutosComponent implements OnInit {
   }
 
   carregarProdutos() {
+    this.erroCarregamento = '';
     this.produtoService.getProdutos().subscribe({
       next: (produtos) => {
         this.produtos = produtos;
         console.log('Produtos carregados:', produtos);
       },
       error: (erro) => {
+        this.erroCarregamento = erro.message;
         console.error('Erro ao carregar produtos:', erro);
       }
     });

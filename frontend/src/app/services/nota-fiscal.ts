@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+//tratamento de erros
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 export interface ItemNotaFiscal {
   produtoId: number;
@@ -23,7 +26,13 @@ export class NotaFiscalService {
   constructor(private http: HttpClient) { }
 
   getNotasFiscais(): Observable<NotaFiscal[]> {
-    return this.http.get<NotaFiscal[]>(this.apiUrl);
+    return this.http.get<NotaFiscal[]>(this.apiUrl).pipe(
+      //tratamento de erros
+      catchError(error => {
+        console.error('Erro ao carregar notas fiscais:', error);
+        return throwError(() => new Error('Serviço de notas fiscais indisponível. Tente novamente.'));
+      })
+    );
   }
 
   criarNotaFiscal(nota: NotaFiscal): Observable<NotaFiscal> {

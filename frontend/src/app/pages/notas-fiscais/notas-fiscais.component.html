@@ -2,6 +2,9 @@
   <h2>Lista de Notas Fiscais</h2>
 
   <button (click)="mostrarFormulario = true">Nova Nota Fiscal</button>
+  <div *ngIf="erroCarregamento" class="erro-mensagem">
+    {{ erroCarregamento }}
+  </div>
 
   <div *ngIf="mostrarFormulario" class="form-container">
     <h3>Nova Nota Fiscal</h3>

@@ -15,13 +15,13 @@ export class NotasFiscaisComponent implements OnInit {
   notasFiscais: NotaFiscal[] = [];
   mostrarFormulario = false;
   carregandoImpressao: number | null = null;
-
   novaNotaFiscal: NotaFiscal = {
     id: 0,
     numeracao: '',
     status: 'Aberta',//status inicial
     itens: []
   };
+  erroCarregamento = '';//mensagem de erro
 
   constructor(private notaFiscalService: NotaFiscalService) {}
 
@@ -30,12 +30,14 @@ export class NotasFiscaisComponent implements OnInit {
   }
 
   carregarNotasFiscais() {
+    this.erroCarregamento = '';
     this.notaFiscalService.getNotasFiscais().subscribe({
       next: (notasFiscais) => {
         this.notasFiscais = notasFiscais;
         console.log('Notas Fiscais carregadas:', notasFiscais);
       },
       error: (erro) => {
+        this.erroCarregamento = erro.message;
         console.error('Erro ao carregar Notas Fiscais:', erro);
       }
     });

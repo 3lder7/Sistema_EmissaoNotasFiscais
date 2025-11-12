@@ -14,3 +14,12 @@ btn-imprimir {
 .btn-imprimir:not(:disabled):hover {
   background-color: #45a049;
 }
+
+.erro-mensagem {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 10px;
+  border: 1px solid #ffcdd2;
+  border-radius: 4px;
+  margin: 10px 0;
+}
