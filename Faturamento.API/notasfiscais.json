@@ -1,0 +1,26 @@
+[
+  {
+    "Id": 1,
+    "Numeracao": "NF0001",
+    "Status": "Fechada",
+    "Itens": [
+      {
+        "Id": 0,
+        "ProdutoId": 1,
+        "Quantidade": 2
+      }
+    ]
+  },
+  {
+    "Id": 2,
+    "Numeracao": "NF0002",
+    "Status": "Fechada",
+    "Itens": [
+      {
+        "Id": 0,
+        "ProdutoId": 2,
+        "Quantidade": 5
+      }
+    ]
+  }
+]

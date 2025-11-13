@@ -23,7 +23,8 @@ export class NotasFiscaisComponent implements OnInit {
     itens: []
   };
   erroCarregamento = '';//mensagem de erro
-  produtosDisponiveis: Produto[] = []; // lista de produtos
+  produtosDisponiveis: Produto[] = []; // lista de produtos para operações
+  produtosParaExibicao: Produto[] = [];// produtos exibidos no formulario (cópia original)
   produtoSelecionadoId: number = 0;
   quantidadeSelecionada: number = 0;
 
@@ -41,6 +42,7 @@ export class NotasFiscaisComponent implements OnInit {
     this.produtoService.getProdutos().subscribe({
       next: (produtos) => {
         this.produtosDisponiveis = produtos;
+        this.produtosParaExibicao = [...produtos];
       },
       error: (erro) => {
         console.error('Erro ao carregar produtos:', erro);
@@ -91,24 +93,17 @@ export class NotasFiscaisComponent implements OnInit {
     const item = nota.itens[0];
     if (!item) return 0;
 
-    const produto = this.produtosDisponiveis.find(p => p.id === item.produtoId);
-    if (produto) {
-      if (nota.status === 'Fechada') {
-        return produto.saldo + item.quantidade;
-      }
-      return produto.saldo;
-    }
-    return 0;
+    const produtoOriginal = this.produtosParaExibicao.find(p => p.id === item.produtoId);
+    return produtoOriginal ? produtoOriginal.saldo : 0;
   }
 
   obterSaldoAtual(nota: NotaFiscal): number {
     const item = nota.itens[0];
     if (!item) return 0;
 
-    const produto = this.produtosDisponiveis.find(p => p.id === item.produtoId);
-    return produto ? produto.saldo : 0;
+    const produtoAtual = this.produtosDisponiveis.find(p => p.id === item.produtoId);
+    return produtoAtual ? produtoAtual.saldo : 0;
   }
-
 
   cancelar() {
     this.mostrarFormulario = false;
@@ -140,22 +135,34 @@ export class NotasFiscaisComponent implements OnInit {
     this.atualizarSaldosProdutos(nota);
 
     nota.status = 'Fechada';
-    this.carregandoImpressao = null;
 
-    console.log(`Nota ${nota.numeracao} impressa e fechada`);
-    // logica api backend
+    this.notaFiscalService.atualizarNotaFiscal(nota).subscribe({
+      next: () => {
+        this.carregandoImpressao = null;
+        console.log(`Nota ${nota.numeracao} atualizada para status: Fechada`);
+      },
+      error: (erro) => {
+        console.error('Erro ao atualizar nota fiscal:', erro);
+        this.carregandoImpressao = null;
+      }
+    });
   }
 
   atualizarSaldosProdutos(nota: NotaFiscal) {
     nota.itens.forEach(item => {
-      const produto = this.produtosDisponiveis.find(p => p.id === item.produtoId);//encontra produto
+      const produto = this.produtosDisponiveis.find(p => p.id === item.produtoId);
       if (produto) {
         const saldoAnterior = produto.saldo;
 
-        //atualiza saldo
-        produto.saldo -= item.quantidade;
-
-        //logica API backend
+        this.produtoService.atualizarSaldo(item.produtoId, item.quantidade).subscribe({
+          next: () => {
+            produto.saldo -= item.quantidade;
+            
+          },
+          error: (erro) => {
+            console.error(`Erro ao atualizar saldo do produto ${produto.descricao}:`, erro);
+          }
+        });
       } else {
         console.error(`Produto com ID ${item.produtoId} não encontrado`);
       }

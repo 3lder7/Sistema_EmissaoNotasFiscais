@@ -3,12 +3,18 @@
     "Id": 1,
     "Codigo": "001",
     "Descricao": "Mouse",
-    "Saldo": 8
+    "Saldo": 10
   },
   {
     "Id": 2,
     "Codigo": "002",
     "Descricao": "Teclado",
-    "Saldo": 5
+    "Saldo": 10
+  },
+  {
+    "Id": 3,
+    "Codigo": "003",
+    "Descricao": "Caneca",
+    "Saldo": 10
   }
 ]

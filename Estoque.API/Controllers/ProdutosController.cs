@@ -27,4 +27,18 @@ public class ProdutosController : ControllerBase
         _repository.Adicionar(produto);
         return CreatedAtAction(nameof(Get), new { id = produto.Id }, produto);
     }
+
+    [HttpPut("{id}/atualizar-saldo")]
+    public IActionResult AtualizarSaldo(int id, [FromBody] int quantidadeUtilizada)
+    {
+        try
+        {
+            _repository.AtualizarSaldo(id, quantidadeUtilizada);
+            return Ok(new { message = "Saldo atualizado com sucesso" });
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { error = ex.Message });
+        }
+    }
 }

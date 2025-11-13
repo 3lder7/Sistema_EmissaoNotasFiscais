@@ -64,3 +64,4 @@ E:\Korp_Teste_ElderGalvao\Estoque.API\obj\Debug\net9.0\refint\Estoque.API.dll
 E:\Korp_Teste_ElderGalvao\Estoque.API\obj\Debug\net9.0\Estoque.API.pdb
 E:\Korp_Teste_ElderGalvao\Estoque.API\obj\Debug\net9.0\Estoque.API.genruntimeconfig.cache
 E:\Korp_Teste_ElderGalvao\Estoque.API\obj\Debug\net9.0\ref\Estoque.API.dll
+E:\Korp_Teste_ElderGalvao\Estoque.API\bin\Debug\net9.0\produtos.json

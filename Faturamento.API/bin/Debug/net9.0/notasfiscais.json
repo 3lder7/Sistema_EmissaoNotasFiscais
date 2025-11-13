@@ -2,12 +2,60 @@
   {
     "Id": 1,
     "Numeracao": "NF0001",
-    "Status": "Aberta",
+    "Status": "Fechada",
     "Itens": [
       {
         "Id": 0,
         "ProdutoId": 1,
         "Quantidade": 2
+      }
+    ]
+  },
+  {
+    "Id": 2,
+    "Numeracao": "NF0002",
+    "Status": "Fechada",
+    "Itens": [
+      {
+        "Id": 0,
+        "ProdutoId": 2,
+        "Quantidade": 2
+      }
+    ]
+  },
+  {
+    "Id": 3,
+    "Numeracao": "NF0003",
+    "Status": "Fechada",
+    "Itens": [
+      {
+        "Id": 0,
+        "ProdutoId": 3,
+        "Quantidade": 2
+      }
+    ]
+  },
+  {
+    "Id": 4,
+    "Numeracao": "NF0004",
+    "Status": "Fechada",
+    "Itens": [
+      {
+        "Id": 0,
+        "ProdutoId": 3,
+        "Quantidade": 3
+      }
+    ]
+  },
+  {
+    "Id": 5,
+    "Numeracao": "NF0005",
+    "Status": "Fechada",
+    "Itens": [
+      {
+        "Id": 0,
+        "ProdutoId": 3,
+        "Quantidade": 5
       }
     ]
   }

@@ -36,4 +36,8 @@ export class ProdutoService {
     return this.http.post<Produto>(this.apiUrl, produto);
   }
 
+  atualizarSaldo(produtoId: number, quantidadeUtilizada: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${produtoId}/atualizar-saldo`, quantidadeUtilizada);
+  }
+
 }

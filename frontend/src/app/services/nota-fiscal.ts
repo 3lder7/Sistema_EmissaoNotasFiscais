@@ -38,4 +38,8 @@ export class NotaFiscalService {
   criarNotaFiscal(nota: NotaFiscal): Observable<NotaFiscal> {
     return this.http.post<NotaFiscal>(this.apiUrl, nota);
   }
+
+  atualizarNotaFiscal(nota: NotaFiscal): Observable<NotaFiscal> {
+    return this.http.put<NotaFiscal>(`${this.apiUrl}/${nota.id}`, nota);
+  }
 }

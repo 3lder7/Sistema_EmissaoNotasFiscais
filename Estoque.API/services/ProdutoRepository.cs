@@ -24,6 +24,15 @@ public class ProdutoRepository
         _produtos.Add(produto);
         SalvarDados();
     }
+    public void AtualizarSaldo(int produtoId, int quantidadeUtilizada)
+    {
+        var produto = _produtos.FirstOrDefault(p => p.Id == produtoId);
+        if (produto != null)
+        {
+            produto.Saldo -= quantidadeUtilizada;
+            SalvarDados();
+        }
+    }
 
     private List<Produto> CarregarDados()
     {
