@@ -63,14 +63,21 @@
         <tr>
           <th>Numeração</th>
           <th>Status</th>
-          <th>Itens</th>
+          <th>Produto</th>
+          <th>Quantidade</th>
+          <th>Saldo Anterior</th>
+          <th>Novo Saldo</th>
+          <th>Ação</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let nota of notasFiscais">
           <td>{{ nota.numeracao }}</td>
           <td>{{ nota.status }}</td>
-          <td>{{ nota.itens.length }} itens</td>
+          <td>{{ obterNomeProduto(nota.itens[0]?.produtoId || 0) }}</td>
+          <td>{{ nota.itens[0]?.quantidade || 0 }}</td>
+          <td>{{ obterSaldoAnterior(nota) }}</td>
+          <td>{{ obterSaldoAtual(nota) }}</td>
           <td>
             <button
               (click)="imprimirNota(nota)"

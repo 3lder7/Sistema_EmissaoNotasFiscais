@@ -81,6 +81,35 @@ export class NotasFiscaisComponent implements OnInit {
     });
   }
 
+  obterNomeProduto(produtoId: number): string {
+    if (!produtoId) return 'Nenhum produto';
+    const produto = this.produtosDisponiveis.find(p => p.id === produtoId);
+    return produto ? produto.descricao : 'Produto não encontrado';
+  }
+
+  obterSaldoAnterior(nota: NotaFiscal): number {
+    const item = nota.itens[0];
+    if (!item) return 0;
+
+    const produto = this.produtosDisponiveis.find(p => p.id === item.produtoId);
+    if (produto) {
+      if (nota.status === 'Fechada') {
+        return produto.saldo + item.quantidade;
+      }
+      return produto.saldo;
+    }
+    return 0;
+  }
+
+  obterSaldoAtual(nota: NotaFiscal): number {
+    const item = nota.itens[0];
+    if (!item) return 0;
+
+    const produto = this.produtosDisponiveis.find(p => p.id === item.produtoId);
+    return produto ? produto.saldo : 0;
+  }
+
+
   cancelar() {
     this.mostrarFormulario = false;
     this.novaNotaFiscal = {
@@ -108,6 +137,8 @@ export class NotasFiscaisComponent implements OnInit {
   }
 
   finalizarImpressao(nota: NotaFiscal) {
+    this.atualizarSaldosProdutos(nota);
+
     nota.status = 'Fechada';
     this.carregandoImpressao = null;
 
@@ -115,4 +146,19 @@ export class NotasFiscaisComponent implements OnInit {
     // logica api backend
   }
 
+  atualizarSaldosProdutos(nota: NotaFiscal) {
+    nota.itens.forEach(item => {
+      const produto = this.produtosDisponiveis.find(p => p.id === item.produtoId);//encontra produto
+      if (produto) {
+        const saldoAnterior = produto.saldo;
+
+        //atualiza saldo
+        produto.saldo -= item.quantidade;
+
+        //logica API backend
+      } else {
+        console.error(`Produto com ID ${item.produtoId} não encontrado`);
+      }
+    });
+  }
 }
