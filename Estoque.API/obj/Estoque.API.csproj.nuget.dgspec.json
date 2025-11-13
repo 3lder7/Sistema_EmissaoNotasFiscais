@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Korp_Teste_Elder\\Estoque.API\\Estoque.API.csproj": {}
+    "E:\\Korp_Teste_ElderGalvao\\Estoque.API\\Estoque.API.csproj": {}
   },
   "projects": {
-    "E:\\Korp_Teste_Elder\\Estoque.API\\Estoque.API.csproj": {
+    "E:\\Korp_Teste_ElderGalvao\\Estoque.API\\Estoque.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Korp_Teste_Elder\\Estoque.API\\Estoque.API.csproj",
+        "projectUniqueName": "E:\\Korp_Teste_ElderGalvao\\Estoque.API\\Estoque.API.csproj",
         "projectName": "Estoque.API",
-        "projectPath": "E:\\Korp_Teste_Elder\\Estoque.API\\Estoque.API.csproj",
+        "projectPath": "E:\\Korp_Teste_ElderGalvao\\Estoque.API\\Estoque.API.csproj",
         "packagesPath": "C:\\Users\\elder\\.nuget\\packages\\",
-        "outputPath": "E:\\Korp_Teste_Elder\\Estoque.API\\obj\\",
+        "outputPath": "E:\\Korp_Teste_ElderGalvao\\Estoque.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "E:\\VisualStudio SDK e Componentes\\NuGetPackages"

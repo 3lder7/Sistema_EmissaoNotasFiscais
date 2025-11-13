@@ -10,16 +10,45 @@
     <h3>Nova Nota Fiscal</h3>
     <form (ngSubmit)="criarNotaFiscal()">
       <div>
-        <label>Status:</label>
-        <select [(ngModel)]="novaNotaFiscal.status" name="status">
-          <option value="Aberta">Aberta</option>
-          <option value="Fechada">Fechada</option>
-        </select>
+        <label>Status: <strong>Aberta</strong></label>
       </div>
 
-      <p><small>Os itens da nota serão implementados em seguida</small></p>
+      <div class="selecao-produto">
+        <h4>Selecionar Produto</h4>
 
-      <button type="submit">Criar Nota</button>
+        <div *ngIf="produtosDisponiveis.length === 0">
+          <p>Nenhum produto cadastrado no sistema.</p>
+        </div>
+
+        <div *ngIf="produtosDisponiveis.length > 0">
+          <div>
+            <label>Produto:</label>
+            <select [(ngModel)]="produtoSelecionadoId" name="produto" required>
+              <option value="0">Selecione um produto</option>
+              <option *ngFor="let produto of produtosDisponiveis" [value]="produto.id">
+                {{ produto.codigo }} - {{ produto.descricao }} (Saldo: {{ produto.saldo }})
+              </option>
+            </select>
+          </div>
+
+          <div>
+            <label>Quantidade:</label>
+            <input
+              type="number"
+              [(ngModel)]="quantidadeSelecionada"
+              name="quantidade"
+              min="1"
+              max="100"
+              required
+              style="width: 80px"
+            />
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="produtoSelecionadoId === 0 || quantidadeSelecionada <= 0">
+        Criar Nota Fiscal
+      </button>
       <button type="button" (click)="cancelar()">Cancelar</button>
     </form>
   </div>

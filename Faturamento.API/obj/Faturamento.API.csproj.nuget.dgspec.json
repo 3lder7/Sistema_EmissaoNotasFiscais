@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Korp_Teste_Elder\\Faturamento.API\\Faturamento.API.csproj": {}
+    "E:\\Korp_Teste_ElderGalvao\\Faturamento.API\\Faturamento.API.csproj": {}
   },
   "projects": {
-    "E:\\Korp_Teste_Elder\\Faturamento.API\\Faturamento.API.csproj": {
+    "E:\\Korp_Teste_ElderGalvao\\Faturamento.API\\Faturamento.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Korp_Teste_Elder\\Faturamento.API\\Faturamento.API.csproj",
+        "projectUniqueName": "E:\\Korp_Teste_ElderGalvao\\Faturamento.API\\Faturamento.API.csproj",
         "projectName": "Faturamento.API",
-        "projectPath": "E:\\Korp_Teste_Elder\\Faturamento.API\\Faturamento.API.csproj",
+        "projectPath": "E:\\Korp_Teste_ElderGalvao\\Faturamento.API\\Faturamento.API.csproj",
         "packagesPath": "C:\\Users\\elder\\.nuget\\packages\\",
-        "outputPath": "E:\\Korp_Teste_Elder\\Faturamento.API\\obj\\",
+        "outputPath": "E:\\Korp_Teste_ElderGalvao\\Faturamento.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "E:\\VisualStudio SDK e Componentes\\NuGetPackages"

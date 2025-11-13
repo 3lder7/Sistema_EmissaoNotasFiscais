@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { NotaFiscalService, NotaFiscal} from '../../services/nota-fiscal';
+import { NotaFiscalService, NotaFiscal, ItemNotaFiscal } from '../../services/nota-fiscal';
 import { FormsModule } from '@angular/forms';
+import { ProdutoService, Produto } from '../../services/produto';
 
 @Component({
   selector: 'app-notas-fiscais',
@@ -22,11 +23,29 @@ export class NotasFiscaisComponent implements OnInit {
     itens: []
   };
   erroCarregamento = '';//mensagem de erro
+  produtosDisponiveis: Produto[] = []; // lista de produtos
+  produtoSelecionadoId: number = 0;
+  quantidadeSelecionada: number = 0;
 
-  constructor(private notaFiscalService: NotaFiscalService) {}
+  constructor(
+    private notaFiscalService: NotaFiscalService,
+    private produtoService: ProdutoService
+  ) { }
 
   ngOnInit() {
     this.carregarNotasFiscais();
+    this.carregarProdutos();
+  }
+
+  carregarProdutos() {
+    this.produtoService.getProdutos().subscribe({
+      next: (produtos) => {
+        this.produtosDisponiveis = produtos;
+      },
+      error: (erro) => {
+        console.error('Erro ao carregar produtos:', erro);
+      }
+    });
   }
 
   carregarNotasFiscais() {
@@ -44,6 +63,12 @@ export class NotasFiscaisComponent implements OnInit {
   }
 
   criarNotaFiscal() {
+    const novoItem: ItemNotaFiscal = {
+      produtoId: this.produtoSelecionadoId,
+      quantidade: this.quantidadeSelecionada
+    };
+    this.novaNotaFiscal.itens = [novoItem]; // add o item selecionado a nova nota fiscal
+
     this.notaFiscalService.criarNotaFiscal(this.novaNotaFiscal).subscribe({
       next: (notaCriada: NotaFiscal) => {
         this.notasFiscais.push(notaCriada);
@@ -58,12 +83,14 @@ export class NotasFiscaisComponent implements OnInit {
 
   cancelar() {
     this.mostrarFormulario = false;
-    this.novaNotaFiscal = { 
-      id: 0, 
-      numeracao: '', 
-      status: 'Aberta', 
-      itens: [] 
+    this.novaNotaFiscal = {
+      id: 0,
+      numeracao: '',
+      status: 'Aberta',
+      itens: []
     };
+    this.produtoSelecionadoId = 0; // reset
+    this.quantidadeSelecionada = 0; // reset
   }
 
   imprimirNota(nota: NotaFiscal) {
@@ -73,7 +100,7 @@ export class NotasFiscaisComponent implements OnInit {
     }
 
     this.carregandoImpressao = nota.id;
-    
+
     // impressao 2 segundos
     setTimeout(() => {
       this.finalizarImpressao(nota);
@@ -83,9 +110,9 @@ export class NotasFiscaisComponent implements OnInit {
   finalizarImpressao(nota: NotaFiscal) {
     nota.status = 'Fechada';
     this.carregandoImpressao = null;
-    
+
     console.log(`Nota ${nota.numeracao} impressa e fechada`);
     // logica api backend
   }
-    
+
 }
