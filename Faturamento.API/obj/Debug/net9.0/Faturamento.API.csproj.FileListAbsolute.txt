@@ -64,3 +64,4 @@ E:\Korp_Teste_ElderGalvao\Faturamento.API\obj\Debug\net9.0\refint\Faturamento.AP
 E:\Korp_Teste_ElderGalvao\Faturamento.API\obj\Debug\net9.0\Faturamento.API.pdb
 E:\Korp_Teste_ElderGalvao\Faturamento.API\obj\Debug\net9.0\Faturamento.API.genruntimeconfig.cache
 E:\Korp_Teste_ElderGalvao\Faturamento.API\obj\Debug\net9.0\ref\Faturamento.API.dll
+E:\Korp_Teste_ElderGalvao\Faturamento.API\bin\Debug\net9.0\notasfiscais.json

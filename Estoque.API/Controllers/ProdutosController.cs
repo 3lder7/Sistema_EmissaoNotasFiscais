@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Estoque.API.Models;
+using Estoque.API.Services;
 
 namespace Estoque.API.Controllers;
 
@@ -7,19 +8,23 @@ namespace Estoque.API.Controllers;
 [Route("api/[controller]")]
 public class ProdutosController : ControllerBase
 {
-    private static List<Produto> _produtos = new List<Produto>();
+    private readonly ProdutoRepository _repository;
 
-    [HttpGet]//retorna produto
-    public IActionResult Get()
+    public ProdutosController()
     {
-        return Ok(_produtos);
+        _repository = new ProdutoRepository();
     }
 
-    [HttpPost]//add produto
+    [HttpGet]
+    public IActionResult Get()
+    {
+        return Ok(_repository.ObterTodos());
+    }
+
+    [HttpPost]
     public IActionResult Post(Produto produto)
     {
-        produto.Id = _produtos.Count + 1;
-        _produtos.Add(produto);
+        _repository.Adicionar(produto);
         return CreatedAtAction(nameof(Get), new { id = produto.Id }, produto);
     }
 }

@@ -1,0 +1,14 @@
+[
+  {
+    "Id": 1,
+    "Numeracao": "NF0001",
+    "Status": "Aberta",
+    "Itens": [
+      {
+        "Id": 0,
+        "ProdutoId": 1,
+        "Quantidade": 2
+      }
+    ]
+  }
+]
